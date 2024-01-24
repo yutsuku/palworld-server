@@ -12,7 +12,19 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      pull-requests: write
+
     steps:
     - uses: actions/checkout@v3
+    - name: docker login
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag yutsuku/palworld:$(date +%s) --tag yutsuku/palworld:latest
+    - name: Docker Push
+      run: docker push ${{ secrets.DOCKER_USER }}/palworld
