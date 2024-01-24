@@ -21,3 +21,5 @@ ENV PUBLIC_IP= \
     MULTITHREAD="true"
 
 EXPOSE ${PORT} ${PUBLIC_PORT}
+
+ENTRYPOINT [ "/entrypoint.sh" ]

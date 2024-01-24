@@ -4,6 +4,9 @@ set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
+# update game
+"$STEAMCMDDIR/steamcmd.sh" +force_install_dir /opt/data +login anonymous +app_update 2394010 validate +quit
+
 PALSERVER="/opt/data/PalServer.sh"
 PALSERVERARGS=""
 
@@ -49,4 +52,4 @@ if [ -n "${MULTITHREAD}" ]; then
 fi
 #endregion
 
-sh $PALSERVER "$PALSERVERARGS"
+$PALSERVER "$PALSERVERARGS"
