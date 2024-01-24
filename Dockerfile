@@ -6,7 +6,8 @@ COPY ./entrypoint.sh /entrypoint.sh
 RUN mkdir -p /opt/data && \
     chown steam:steam /opt/data
 USER steam
-RUN steamcmd.sh +force_install_dir /opt/data +login anonymous +app_update 2394010 validate +quit
+RUN pwd && ls -lah
+RUN ./steamcmd.sh +force_install_dir /opt/data +login anonymous +app_update 2394010 validate +quit
 
 ENV PUBLIC_IP= \
     PORT=8211 \
