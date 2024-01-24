@@ -52,6 +52,7 @@ if [ -n "${MULTITHREAD}" ]; then
 fi
 #endregion
 
-printf "%s\n" $PALSERVER "$PALSERVERARGS"
+printf "%s\n" "Starting"
+printf "%s\n" "${PALSERVER}${PALSERVERARGS}"
 
-$PALSERVER "$PALSERVERARGS"
+sh -c "${PALSERVER}${PALSERVERARGS}"
