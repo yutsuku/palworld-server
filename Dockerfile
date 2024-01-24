@@ -1,11 +1,12 @@
-FROM cm2network/steamcmd:latest as base
+FROM cm2network/steamcmd:root as base
 
 LABEL maintainer="moh@yutsuku.net"
 
-RUN mkdir -p /opt/data && \
-    steamcmd.sh +force_install_dir /opt/data +login anonymous +app_update 2394010 validate +quit
-
 COPY ./entrypoint.sh /entrypoint.sh
+RUN mkdir -p /opt/data && \
+    chown steam:steam /opt/data
+USER steam
+RUN steamcmd.sh +force_install_dir /opt/data +login anonymous +app_update 2394010 validate +quit
 
 ENV PUBLIC_IP= \
     PORT=8211 \
