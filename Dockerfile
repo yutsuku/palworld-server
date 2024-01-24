@@ -5,7 +5,8 @@ LABEL maintainer="moh@yutsuku.net"
 COPY ./entrypoint.sh /entrypoint.sh
 RUN mkdir -p /opt/data && \
     chown steam:steam /opt/data && \
-    chown steam:steam /entrypoint.sh
+    chown steam:steam /entrypoint.sh \
+    chmod +x /entrypoint.sh
 USER steam
 RUN pwd && ls -lah
 RUN ./steamcmd.sh +force_install_dir /opt/data +login anonymous +app_update 2394010 validate +quit
